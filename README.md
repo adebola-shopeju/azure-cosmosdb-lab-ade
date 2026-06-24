@@ -57,7 +57,7 @@ The `/category` field was chosen as the partition key because:
 ### Task 1 — Account Creation
 Created an Azure Cosmos DB account using the NoSQL API in Sweden Central with Provisioned Throughput mode and the Free Tier discount applied.
 
-📸 `screenshots/screenshot-01-cosmos-account-overview.png`
+📸 `cosmos-account-overview.png`
 
 ---
 
@@ -67,7 +67,7 @@ Configured multi-region replication by adding **UK South** as a read replica to 
 **CAP Theorem Trade-off:**
 Adding a read region improves availability and reduces read latency for geographically distributed users. However, it increases replication cost and introduces slight write latency due to cross-region synchronization. This is the core Consistency vs. Availability vs. Cost trade-off in distributed database design.
 
-📸 `screenshots/screenshot-02-replication-map.png`
+📸 `replication-map.png`
 
 ---
 
@@ -81,7 +81,7 @@ Created a database and container with the following configuration:
 | **Partition Key** | `/category` |
 | **Throughput** | 400 RU/s (Manual) |
 
-📸 `screenshots/screenshot-03-database-container.png`
+📸 `database-container.png`
 
 ---
 
@@ -104,7 +104,7 @@ SELECT * FROM c WHERE c.category = 'electronics'
 
 **Delete** — Removed Document 3 (books)
 
-📸 `screenshots/screenshot-04-crud-documents.png`
+📸 `crud-documents.png`
 
 ---
 
@@ -118,7 +118,7 @@ Explored both throughput modes available in Azure Cosmos DB:
 
 The account was returned to **Manual at 400 RU/s** after testing to maintain zero cost under the free tier.
 
-📸 `screenshots/screenshot-05-throughput-scale.png`
+📸 `throughput-scale.png`
 
 ---
 
@@ -140,7 +140,7 @@ Configured Azure Metrics to monitor database performance using two key metrics:
 | **Total Requests** | 14 requests | All API operations performed during the lab |
 | **Server Side Latency Gateway** | 11.29ms | Server processing time — well within the <10ms target for point reads |
 
-📸 `screenshots/screenshot-06-metrics-dashboard.png`
+📸 `metrics-dashboard.png`
 
 ---
 
@@ -148,28 +148,27 @@ Configured Azure Metrics to monitor database performance using two key metrics:
 
 | # | Screenshot | Description |
 |---|---|---|
-| 1 | `screenshots/screenshot-01-cosmos-account-overview.png` | Cosmos DB account overview showing Online status |
-| 2 | `screenshots/screenshot-02-replication-map.png` | Global replication showing Sweden Central + UK South |
-| 3 | `screenshots/screenshot-03-database-container.png` | Data Explorer with LabDatabase and LabContainer |
-| 4 | `screenshots/screenshot-04-crud-documents.png` | Items view showing inserted JSON documents |
-| 5 | `screenshots/screenshot-05-throughput-scale.png` | Scale pane showing Manual 400 RU/s configuration |
-| 6 | `screenshots/screenshot-06-metrics-dashboard.png` | Metrics dashboard with Total Requests and Latency graphs |
+| 1 | `cosmos-account-overview.png` | Cosmos DB account overview showing Online status |
+| 2 | `replication-map.png` | Global replication showing Sweden Central + UK South |
+| 3 | `database-container.png` | Data Explorer with LabDatabase and LabContainer |
+| 4 | `crud-documents.png` | Items view showing inserted JSON documents |
+| 5 | `throughput-scale.png` | Scale pane showing Manual 400 RU/s configuration |
+| 6 | `metrics-dashboard.png` | Metrics dashboard with Total Requests and Latency graphs |
 
 ---
 
 ## Repository Structure
 
 ```
-azure-cosmosdb-lab/
+azure-cosmosdb-lab-ade/
 │
 ├── README.md
-└── screenshots/
-    ├── screenshot-01-cosmos-account-overview.png
-    ├── screenshot-02-replication-map.png
-    ├── screenshot-03-database-container.png
-    ├── screenshot-04-crud-documents.png
-    ├── screenshot-05-throughput-scale.png
-    └── screenshot-06-metrics-dashboard.png
+├── cosmos-account-overview.png
+├── replication-map.png
+├── database-container.png
+├── crud-documents.png
+├── throughput-scale.png
+└── metrics-dashboard.png
 ```
 
 ---
@@ -180,17 +179,3 @@ azure-cosmosdb-lab/
 - **CAP Theorem in Practice:** Adding a second region demonstrates the real-world trade-off between consistency, availability, and partition tolerance.
 - **Request Units (RUs):** RUs abstract compute, memory, and I/O into a single billing unit — understanding RU consumption is critical for cost-efficient database design.
 - **Partition Keys:** Choosing an effective partition key is the most important design decision in Cosmos DB — it directly impacts scalability, performance, and cost.
-
----
-
-## Cleanup
-
-To avoid unexpected charges after submission, delete all resources:
-
-```bash
-az group delete --name rg-cosmoslab --yes --no-wait
-```
-
----
-
-*Lab completed on Azure for Students subscription | Azure Cosmos DB for NoSQL API*
